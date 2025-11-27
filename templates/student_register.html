@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Student Login</title>
+  <title>Student Register</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
 
 <nav class="nav">
@@ -15,7 +14,8 @@
 </nav>
 
 <main class="container">
-<h1>Student Login</h1>
+
+<h1>Student Registration</h1>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
@@ -30,17 +30,23 @@
 <form method="post">
   <div class="form-row">
     <label>Username</label>
-    <input class="input" name="username">
+    <input name="username" class="input">
+  </div>
+
+  <div class="form-row">
+    <label>Email</label>
+    <input name="email" class="input">
   </div>
 
   <div class="form-row">
     <label>Password</label>
-    <input type="password" class="input" name="password">
+    <input type="password" name="password" class="input">
   </div>
 
-  <button class="btn">Login</button>
-  <a href="{{ url_for('student_register') }}" class="btn btn-outline">Register</a>
+  <button class="btn">Register</button>
+  <a class="btn btn-outline" href="{{ url_for('student_login') }}">Login</a>
 </form>
+
 </main>
 
 </body>

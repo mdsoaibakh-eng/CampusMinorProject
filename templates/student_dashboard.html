@@ -1,11 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
-    
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+    <div>
+      <a class="btn btn-outline" href="{{ url_for('upload_resume') }}">Upload Resume</a>
+      <a class="btn btn-outline" href="{{ url_for('student_logout') }}">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<h1>Welcome, {{ student.username }}</h1>
+
+<h2>Your Applications</h2>
+
+<ul class="list">
+  {% for app in applications %}
+  <li>
+    <strong>{{ app.resume_filename }}</strong> —
+    Status: {{ app.status }}
+    {% if app.status == 'Approved' %}{% endif %}
+  </li>
+  {% else %}
+  <li>No applications yet.</li>
+  {% endfor %}
+</ul>
+
+</main>
+
 </body>
 </html>

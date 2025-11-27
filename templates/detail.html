@@ -1,36 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ item.title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-   <main class="container">
- {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+      <div>
+        <a class="btn btn-outline" href="{{ url_for('edit', item_id=item.id) }}">Edit</a>
+        <a class="btn btn-outline" href="{{ url_for('index') }}">Back</a>
+        <a class="btn btn-outline" href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
         <div class="flashes">
-            {% for category, msg in messages %}
+          {% for category, msg in messages %}
             <div class="flash {{ category }}">{{ msg }}</div>
-            {% endfor %}
+          {% endfor %}
         </div>
-        {% endif %}
+      {% endif %}
     {% endwith %}
 
     <article class="detail">
-        <h1> {{ item.title }}</h1>  </article>
-        <p class="muted small">{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
-        <div class="body"> {{ item.description | nl2br }}</div>
+      <h1>{{ item.title }}</h1>
+      <p class="muted small">Created: {{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+      <div class="body">{{ item.description | nl2br }}</div>
 
-        <div class="actions"> 
-          <a class="btn" href="{{ url_for('edit', item_id=item.id) }}">Edit</a>
-          <a class="btn btn-outline"  href="{{ url_for('index') }}">Back </a>
-
-          <form method="post" action="{{ url_for('delete', item_id=item.id) }}" onsubmit="return confirm('Delete this item?');" style="display:inline;">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
-        </div>
+      <div class="actions">
+        <a class="btn" href="{{ url_for('edit', item_id=item.id) }}">Edit</a>
+        <a class="btn btn-outline" href="{{ url_for('index') }}">Back</a>
+        <form method="post" action="{{ url_for('delete', item_id=item.id) }}" onsubmit="return confirm('Delete this item?');" style="display:inline;">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
     </article>
-   </main>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Demo CRUD</div>
+  </footer>
 </body>
 </html>

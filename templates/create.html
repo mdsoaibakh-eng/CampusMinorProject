@@ -1,44 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Item</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-   <main class="container">
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+      <div><a class="btn btn-outline" href="{{ url_for('index') }}">Back</a>
+      <a class="btn btn-outline" href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+      {% if messages %}
         <div class="flashes">
-            {% for category, msg in messages %}
+          {% for category, msg in messages %}
             <div class="flash {{ category }}">{{ msg }}</div>
-            {% endfor %}
+          {% endfor %}
         </div>
-        {% endif %}
+      {% endif %}
     {% endwith %}
 
     <h1>Create Item</h1>
     <form method="post" action="{{ url_for('create') }}">
-        <div class="form-row">
-            <label for="title"><Title></Title>:</label>
-            <input id="title" name="title" class="input" value="{{title|e}}">
-        </div>
-       <div>
-        <div class="form-row">
-            <label for="content">Description:</label>
-            <textarea id="description" name="description" class="input">{{description|e}}    
-            </textarea>
-       </div>
+      <div class="form-row">
+        <label for="title">Title</label><br>
+        <input id="title" name="title" class="input" value="{{ title|e }}">
+      </div>
 
-        
-        <div class="form-row">
-        <button type="submit">Create</button>
-        <a class="btn btn-primary" href="{{ url_for('index') }}">Cancel</a>
-        </div>
+      <div class="form-row">
+        <label for="description">Description</label><br>
+        <textarea id="description" name="description" class="textarea">{{ description|e }}</textarea>
+      </div>
+
+      <div class="form-row">
+        <button type="submit" class="btn">Save</button>
+        <a class="btn btn-outline" href="{{ url_for('index') }}">Cancel</a>
+      </div>
     </form>
-   </main>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Demo CRUD</div>
+  </footer>
 </body>
 </html>

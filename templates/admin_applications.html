@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Student Applications</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+    <div>
+      <a class="btn btn-outline" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<h1>Student Applications</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <div class="flashes">
+    {% for category, msg in messages %}
+      <div class="flash {{ category }}">{{ msg }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Resume</th>
+      <th>Status</th>
+      <th>Approve</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for app in applications %}
+    <tr>
+      <td>{{ app.student.username }}</td>
+      <td>
+        <a href="{{ url_for('static', filename='uploads/' ~ app.resume_filename) }}" target="_blank">
+          View Resume
+        </a>
+      </td>
+      <td>{{ app.status }}</td>
+      <td>
+        {% if app.status != 'Approved' %}
+        <form method="post" action="{{ url_for('approve_application', app_id=app.id) }}">
+          <button class="btn">Approve</button>
+        </form>
+        {% else %}
+          Approved
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4">No applications yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</main>
+</body>
+</html>

@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
 <body>
     <main class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+      {% if messages %}
         <div class="flashes">
-            {% for category, msg in messages %}
+          {% for category, msg in messages %}
             <div class="flash {{ category }}">{{ msg }}</div>
-            {% endfor %}
+          {% endfor %}
         </div>
-        {% endif %}
+      {% endif %}
     {% endwith %}
-    <h1>Admin Login</h1>
-    <form method="post" action="{{ url_for('admin_login') }}">
-    <table>
-        <tr>
-            <input type="text" name="username" placeholder="Username" value="{{ username|e}}" required>
-        </tr>
-        <tr>
-            <input type="password" name="password" placeholder="Password" value="{{ password|e}}" required>
-        </tr>
-        <tr>
+        <h1>Admin Login</h1>
+        <form method="post" action="{{ url_for('admin_login') }}">
+        <table>
+            <tr>
+            <input type="text" name="username" placeholder="Username" value="{{ username|e }}" required>
+            </tr>
+            <tr>
+            <input type="password" name="password" placeholder="Password" value="{{ password|e }}" required>
+            </tr>
+            <tr>
             <button type="submit" class="btn">Login</button>
             <a class="btn btn-outline" href="{{ url_for('admin_register') }}">Register</a>
-        </tr>
-    </table>
+            </tr>
+        </table>
+        </form>
+    </main>
 </body>
 </html>

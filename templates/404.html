@@ -1,17 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Not Found</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-   
-   <main class="container">
-     <div class="card">
-        <h1>404 Not found</h1>
-        <a class="btn" href="{{ url_for('index') }}">Back to Home</a>
-     </div>
-    </main>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+      <div><a class="btn btn-outline" href="{{ url_for('index') }}">Home</a></div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="card">
+      <h1>404 — Not Found</h1>
+      <p>The page you requested wasn't found.</p>
+      <a class="btn" href="{{ url_for('index') }}">Back to home</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Demo CRUD</div>
+  </footer>
 </body>
 </html>

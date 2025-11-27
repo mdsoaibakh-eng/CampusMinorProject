@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Student Login</title>
+  <title>Upload Resume</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -11,11 +11,15 @@
 <nav class="nav">
   <div class="container nav-inner">
     <a class="brand" href="{{ url_for('index') }}">FlaskCRUD</a>
+    <div>
+      <a class="btn btn-outline" href="{{ url_for('student_dashboard') }}">Back</a>
+      <a class="btn btn-outline" href="{{ url_for('student_logout') }}">Logout</a>
+    </div>
   </div>
 </nav>
 
 <main class="container">
-<h1>Student Login</h1>
+<h1>Upload Resume</h1>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
@@ -27,19 +31,13 @@
 {% endif %}
 {% endwith %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <div class="form-row">
-    <label>Username</label>
-    <input class="input" name="username">
+    <label>Select Resume (PDF/DOC/DOCX)</label>
+    <input type="file" name="resume" class="input">
   </div>
 
-  <div class="form-row">
-    <label>Password</label>
-    <input type="password" class="input" name="password">
-  </div>
-
-  <button class="btn">Login</button>
-  <a href="{{ url_for('student_register') }}" class="btn btn-outline">Register</a>
+  <button class="btn">Upload</button>
 </form>
 </main>
 
